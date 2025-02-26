@@ -3,6 +3,7 @@
 -This application uses the Zohomail service to send emails to addresses listed in a CSV file.
 
 -The user's credentials are required to send through the SMTP protocol.
+  -The server is opened on port 465, please ensure this port isn't blocked beforehand.
 
 -The provided text and CSV files are for the message to be sent and the recipient emails.
 
