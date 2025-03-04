@@ -1,3 +1,4 @@
+import re
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -6,6 +7,7 @@ from tkinter import*
 import csv
 import os
 import pandas as pd
+import row
 
 
 #sends an email through an SMTP Server via ZohoMail.
@@ -21,12 +23,9 @@ def SendEmail(subject ,message, from_addr, to_addr, password):
     msg['Subject'] = subject
 
     #sender of the email
-    
     msg['From'] = from_addr
 
-
     #receiver of the email
-
     msg['To'] = to_addr
 
 
@@ -34,14 +33,11 @@ def SendEmail(subject ,message, from_addr, to_addr, password):
     #open server, and send an email
 
         server = smtplib.SMTP_SSL('smtp.zoho.com', 465)
-
         server.login(from_addr, password)
-
         #send message
 
         server.send_message(msg)
         print('email sent successfully!')
-
         #close server
 
         server.quit()
@@ -49,7 +45,6 @@ def SendEmail(subject ,message, from_addr, to_addr, password):
         print(f"SMTP Exception: {e}")
     except Exception as e:
         print(f"Error: {e}")
-
 
 
 
@@ -81,7 +76,31 @@ def bulkEmail(subject, emailMessage, from_addr, password, myCSV):
         print("file not found!")
     except Exception as e:
         print("An error has occurred" + {e})
+
+    cwd = os.getcwd()
     
+    with open(myCSV, newline='', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)  # Read as dictionary
+        #header = next(reader)
+        for row in reader:
+            file = open("emailbody.txt")
+            template=file.read()
+            file.close()
+
+            # Replace placeholders with corresponding values
+            message = template
+            email_to_send = ""
+            for key in row:  # Iterate over headers
+                if key == "email":
+                    email_to_send = row[key]
+                message = message.replace(f"[{key}]", row[key])
+            print(message)
+            SendEmail(subject, message, from_addr, email_to_send , password)
+    
+
+
+
+"""
 #appends a greeting using full name and message into an email.
 #utilize itertuples to traverse both columns for emails and names  
     for x, y in mySheet.itertuples(index=False):
@@ -90,3 +109,4 @@ def bulkEmail(subject, emailMessage, from_addr, password, myCSV):
         SendEmail(subject,messageToSend,from_addr,x,password)
     
     
+"""

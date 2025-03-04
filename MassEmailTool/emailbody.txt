@@ -1,5 +1,8 @@
-Welcome to our monthly educational newsletter! We're excited to share the latest trends and innovations shaping the future of learning.
 
-This month, we dive into the world of personalized learning, exploring how technology is transforming classrooms to meet individual student needs. Plus, don't miss our exclusive interview with renowned educator Dr. Jane Smith, who shares insights on fostering creativity in the classroom.
 
-Join us for upcoming webinars on STEM education and inclusive teaching strategies. Stay connected and inspired with our community of passionate educators!
+Hello [parent1],
+
+welcome to the coding class! Please sign up [student1]!
+
+Best,
+Alex
