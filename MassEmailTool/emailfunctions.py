@@ -19,6 +19,11 @@ def SendEmail(subject ,message, from_addr, to_addr, password):
     msg = MIMEMultipart()
     msg.attach(MIMEText(message))
 
+    with open("images/cutest.png", 'rb') as fp:
+        img = MIMEImage(fp.read())
+    msg.attach(img)
+    #msg.attach(MIMEImage("csv/cutest.png"))
+
     #subject of email
     msg['Subject'] = subject
 
